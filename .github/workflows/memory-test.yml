@@ -5,19 +5,20 @@ on:
 
 jobs:
   system-snapshot:
-  runs-on: ubuntu-latest
+    name: System snapshot
+    runs-on: ubuntu-latest
 
-  steps:
+    steps:
 
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: System snapshot
-      if: always()
-      run: |
-        date
-        free -h || true
-        df -h || true
-        nproc || true
-        ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head -n 20 || true
-        dmesg | tail -n 50 || true
+      - name: System snapshot
+        if: always()
+        run: |
+          date
+          free -h || true
+          df -h || true
+          nproc || true
+          ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head -n 20 || true
+          dmesg | tail -n 50 || true
